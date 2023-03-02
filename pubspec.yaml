@@ -18,4 +18,13 @@ dev_dependencies:
 
 flutter: 
   uses-material-design: true
+  assets:
+    - assets/images/splash_background.png
 
+
+  fonts:
+    - family: Raleway
+      fonts:
+        - asset: assets/fonts/Raleway-Bold.ttf
+          weight: 700
+        

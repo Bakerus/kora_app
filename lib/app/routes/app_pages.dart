@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
 
 import '../modules/account_connexion/bindings/account_connexion_binding.dart';
-import '../modules/account_connexion/bindings/account_connexion_binding.dart';
-import '../modules/account_connexion/views/account_connexion_view.dart';
 import '../modules/account_connexion/views/account_connexion_view.dart';
 import '../modules/answer/bindings/answer_binding.dart';
 import '../modules/answer/views/answer_view.dart';
@@ -20,12 +18,12 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN;
+  static const INITIAL = Routes.IDENTIFICATION;
 
   static final routes = [
     GetPage(
       name: _Paths.LOGIN,
-      page: () =>  LoginView(),
+      page: () =>  const LoginView(),
       binding: LoginBinding(),
     ),
     GetPage(

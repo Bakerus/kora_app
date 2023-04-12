@@ -8,7 +8,13 @@ environment:
 dependencies:
   cupertino_icons: ^1.0.2
   get: 4.6.5
+  http: ^0.13.4
+  get_storage: ^2.1.1
+  pin_code_fields: ^7.4.0
+  email_auth: ^1.0.0
+  step_progress_indicator: ^1.0.2
   flutter_barcode_scanner: ^2.0.0
+  web_socket_channel: ^2.4.0
   flutter:
     sdk: flutter
 
@@ -19,8 +25,8 @@ dev_dependencies:
   flutter_native_splash: ^2.2.18
 
 flutter_native_splash:
-  image:  assets/images/logo.png
-  background_image: "assets/images/backgroundSplash2.png"
+  image:  assets/images/font-pic.png
+  background_image: "assets/images/background.png"
 
 flutter:
   uses-material-design: true
@@ -30,6 +36,11 @@ flutter:
     - assets/images/validate.png
     - assets/images/error.png
     - assets/images/scanning.png
+    - assets/images/background.png
+    - assets/images/font-pic.png
+    - assets/images/unite.png
+    - assets/images/plant_background.png
+    - assets/images/backgroundProgress.png
 
   fonts:
     - family: Raleway

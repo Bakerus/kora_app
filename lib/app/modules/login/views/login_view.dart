@@ -3,17 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kora/app/core/design/colors.dart';
 import 'package:kora/app/core/design/theme.dart';
+import 'package:kora/app/core/utils/controller.dart';
 import 'package:kora/app/modules/login/views/confirm_login_view.dart';
 
+import '../../../core/widgets/snackbar.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
-  LoginView({Key? key}) : super(key: key);
-
-  var emailEditingController = TextEditingController();
+  const LoginView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+      var emailEditingController = TextEditingController();
+      GlobalAppController control = Get.put(GlobalAppController());
+      Snackbar snackbar = const Snackbar();
+      
     return Scaffold(
       appBar: AppBar(
           title: const Text('Login'),
@@ -62,7 +66,7 @@ class LoginView extends GetView<LoginController> {
                                           child: TextField(
                                               controller:
                                                   emailEditingController,
-                                              decoration: InputDecoration(
+                                              decoration: const InputDecoration(
                                                 prefixIcon: Icon(
                                                   Icons.mail_outlined,
                                                   size: 24,
@@ -71,20 +75,30 @@ class LoginView extends GetView<LoginController> {
                                               ))),
                                       SizedBox(
                                           height: 56,
-                                          child: TextField(
-                                              obscureText: true,
-                                              decoration: InputDecoration(
-                                                prefixIcon: const Icon(
-                                                  Icons.lock_outlined,
-                                                  size: 24,
+                                          child: Obx(() => TextField(
+                                                obscureText:
+                                                    control.isdiplay.value,
+                                                decoration: InputDecoration(
+                                                  prefixIcon: const Icon(
+                                                    Icons.lock_outlined,
+                                                    size: 24,
+                                                  ),
+                                                  suffixIcon: IconButton(
+                                                      onPressed: () {
+                                                        control.display();
+                                                      },
+                                                      icon: Icon(
+                                                          control.isdiplay.value
+                                                              ? Icons.visibility
+                                                              : Icons
+                                                                  .visibility_off,
+                                                          color:
+                                                              AppColors.grey)),
+                                                  labelText: "confirm password",
                                                 ),
-                                                suffixIcon: IconButton(
-                                                    onPressed: () {},
-                                                    icon: const Icon(
-                                                        Icons.remove_red_eye,
-                                                        color: AppColors.grey)),
-                                                labelText: "confirm password",
-                                              ))),
+                                              ),
+                                            ),
+                                           ),
                                     ]),
                               ),
                             ]),
@@ -98,14 +112,12 @@ class LoginView extends GetView<LoginController> {
                                   width: double.infinity,
                                   child: ElevatedButton(
                                       onPressed: () {
-
-                                        if(GetUtils.isEmail(emailEditingController.text)){
-                                          print("The format of your e-mail is correct");
-                                          Get.to(ConfirmLoginView());
-                                        }else{
-                                          print("This format of e-mail is incorrect");
+                                        if (GetUtils.isEmail(
+                                            emailEditingController.text)) {
+                                          Get.to(const ConfirmLoginView());
+                                        } else {
+                                          snackbar.showSnackbar(title:"Erreur", message: "Veuillez veridiez votre email");
                                         }
-
                                       },
                                       child: Text(
                                         "Continue",

@@ -29,7 +29,7 @@ class AppTheme {
 
         headline6: TextStyle(
             color: AppColors.clearBlueMaterial[900],
-            fontSize: 25.0,
+            fontSize: 55.0,
             fontWeight: FontWeight.w700,
             fontFamily: "Montserrat"),    
 

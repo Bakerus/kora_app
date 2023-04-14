@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:get_storage/get_storage.dart';
 import 'package:kora/app/data/models/token.dart';
-import 'package:web_socket_channel/io.dart';
 import 'header.dart';
 import 'package:http/http.dart';
 import '../models/user.dart';
@@ -19,7 +18,7 @@ class UserProvider {
     required String firstname,
     required String email,
     required String password,
-    bool is_premium = false,
+    bool isPremium = false,
     bool admin = true,
   }) async {
     final result = await post(
@@ -30,7 +29,7 @@ class UserProvider {
         "firstname": firstname,
         "email": email,
         "password": password,
-        "is_premium": is_premium,
+        "is_premium": isPremium,
         "admin": admin
       }),
     );
@@ -59,15 +58,4 @@ class UserProvider {
     return Token.fromJson(json.decode(result.body));
   }
 
-  Future<IOWebSocketChannel> serreConnection() async {
-    // User? user = await UserProvider.instance.authentification(email: "yvan", password: "yvan");
-    // print(user!.token);
-    final wsUrl = 'wss://koraapi.alwaysdata.net/ws/user/${storage.read("token")}/';
-
-    var channel = IOWebSocketChannel.connect(wsUrl, pingInterval: const Duration(seconds: 10));
-
-    
-
-    return channel;
-  }
 }

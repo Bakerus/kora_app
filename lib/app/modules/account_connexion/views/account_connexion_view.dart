@@ -20,7 +20,9 @@ class AccountConnexionView extends GetView<AccountConnexionController> {
               Icons.arrow_back_ios,
               color: AppColors.greenMaterial[900],
             ),
-            onPressed: () {},
+            onPressed: () {
+              Get.back();
+            },
           )),
       body: Padding(
         padding: const EdgeInsets.all(10.0),

@@ -13,202 +13,277 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     HomeController homeController = HomeController();
     homeController.onInit();
+
     // GetStorage getstorage = GetStorage();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height * 0.22,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(AppImages.plantBackground),
-                  fit: BoxFit.cover,
+        appBar: AppBar(
+          title: const Text('Home'),
+          centerTitle: true,
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height * 0.22,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(AppImages.plantBackground),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: const Center(
+                    child: Text(
+                  "",
+                  style: TextStyle(fontSize: 50.0, color: Colors.white),
+                )),
+              ),
+              SizedBox(
+                child: Card(
+                  color: const Color.fromRGBO(255, 255, 255, 0.85),
+                  elevation: 10.0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0)),
+                  child: Column(children: [
+                    Obx(
+                      () => Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: itemscard(
+                          context: context,
+                          title: "temperature",
+                          buttontitle: "réguler",
+                          height: 69.0,
+                          width: 69.0,
+                          currentStep: homeController.temperature.value.isEmpty
+                              ? 0
+                              : int.parse(homeController.temperature.value
+                                  .split('.')
+                                  .first),
+                          settings: () {
+                            Get.to(TemperatureAndHumidityView(
+                              title: const Text("Temperature"),
+                              descriptionType: "temperature",
+                              progressIcon: Text(
+                                "${homeController.temperature.value}°",
+                                style: Get.theme.textTheme.subtitle1,
+                              ),
+                              currentStep: int.parse(homeController
+                                  .temperature.value
+                                  .split('.')
+                                  .first),
+                            ));
+                          },
+                          progressIcon: Text(
+                            "${homeController.temperature.value}°",
+                            style: Get.theme.textTheme.subtitle1,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Obx(
+                      () => Container(
+                        decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                        padding: const EdgeInsets.all(15.0),
+                        child: itemscard(
+                          context: context,
+                          title: "luminosite",
+                          buttontitle: "réguler",
+                          height: 69.0,
+                          width: 69.0,
+                          currentStep: homeController.luminosite.value.isEmpty
+                              ? 0
+                              : int.parse(homeController.luminosite.value
+                                  .split('.')
+                                  .first),
+                          settings: () {
+                            Get.to(TemperatureAndHumidityView(
+                              title: const Text("luminosite"),
+                              descriptionType: "luminosite",
+                              progressIcon: Text(
+                                "${homeController.luminosite.value}%",
+                                style: Get.theme.textTheme.subtitle1,
+                              ),
+                              currentStep: int.parse(homeController
+                                  .luminosite.value
+                                  .split('.')
+                                  .first),
+                            ));
+                          },
+                          progressIcon: Text(
+                            "${homeController.luminosite.value}%",
+                            style: Get.theme.textTheme.subtitle1,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Obx(
+                      () => Container(
+                        decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                        padding: const EdgeInsets.all(15.0),
+                        child: itemscard(
+                          context: context,
+                          title: "humidite",
+                          buttontitle: "réguler",
+                          height: 69.0,
+                          width: 69.0,
+                          currentStep: homeController.humiditeAir.value.isEmpty
+                              ? 0
+                              : int.parse(homeController.humiditeAir.value
+                                  .split('.')
+                                  .first),
+                          settings: () {
+                            Get.to(TemperatureAndHumidityView(
+                              title: const Text("Humidité"),
+                              descriptionType: "humiditeAir",
+                              progressIcon: Text(
+                                "${homeController.humiditeAir.value}%",
+                                style: Get.theme.textTheme.subtitle1,
+                              ),
+                              currentStep: int.parse(homeController
+                                  .humiditeAir.value
+                                  .split('.')
+                                  .first),
+                            ));
+                          },
+                          progressIcon: Text(
+                            "${homeController.humiditeAir.value}%",
+                            style: Get.theme.textTheme.subtitle1,
+                          ),
+                        ),
+                      ),
+                    )
+                  ]),
                 ),
               ),
-              child: const Center(
-                  child: Text(
-                "22:10:7",
-                style: TextStyle(fontSize: 50.0, color: Colors.white),
-              )),
-            ),
-            SizedBox(
-              child: Card(
-                color: const Color.fromRGBO(255, 255, 255, 0.85),
-                elevation: 10.0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0)),
-                child: Column(children: [
-                  Obx(
-                    () => Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: itemscard(
-                        context: context,
-                        title: "temperature",
-                        buttontitle: "réguler",
-                        height: 69.0,
-                        width: 69.0,
-                        currentStep: homeController.temperature.value.isEmpty
-                            ? 0
-                            : int.parse(homeController.temperature.value
-                                .split('.')
-                                .first),
-                        settings: () {
-                          Get.to(TemperatureAndHumidityView(
-                            title: const Text("Temperature"),
-                            descriptionType: "temperature",
-                            progressIcon: Text(
-                              "${homeController.temperature.value}°",
-                              style: Get.theme.textTheme.subtitle1,
-                            ),
-                            currentStep: int.parse(homeController
-                                .temperature.value
-                                .split('.')
-                                .first),
-                          ));
-                        },
-                        progressIcon: Text(
-                          "${homeController.temperature.value}°",
-                          style: Get.theme.textTheme.subtitle1,
+              SizedBox(
+                child: Card(
+                  color: const Color.fromRGBO(255, 255, 255, 0.85),
+                  elevation: 10.0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0)),
+                  child: Column(children: [
+                    Obx(
+                      () => Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: itemscard(
+                          context: context,
+                          title: "éclairage",
+                          buttontitle: homeController.lumiere.value
+                              ? "Eteindre"
+                              : "Allumer",
+                          height: 69.0,
+                          width: 69.0,
+                          currentStep: homeController.lumiere.value ? 100 : 0,
+                          settings: () {
+                            homeController.setparameters(
+                                valeur: homeController.lumiere.value,
+                                parametre: "luminosite");
+                          },
+                          progressIcon: Text(
+                            homeController.lumiere.value ? "ON" : "OFF",
+                            style: Get.theme.textTheme.subtitle1,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Obx(
-                    () => Container(
-                      decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(15))),
-                      padding: const EdgeInsets.all(15.0),
-                      child: itemscard(
-                        context: context,
-                        title: "humidite",
-                        buttontitle: "réguler",
-                        height: 69.0,
-                        width: 69.0,
-                        currentStep: homeController.humiditeAir.value.isEmpty
-                            ? 0
-                            : int.parse(homeController.humiditeAir.value
-                                .split('.')
-                                .first),
-                        settings: () {
-                          Get.to(TemperatureAndHumidityView(
-                            title: const Text("Humidité"),
-                            descriptionType: "humiditeAir",
-                            progressIcon: Text(
-                              "${homeController.humiditeAir.value}%",
-                              style: Get.theme.textTheme.subtitle1,
-                            ),
-                            currentStep: int.parse(homeController
-                                .humiditeAir.value
-                                .split('.')
-                                .first),
-                          ));
-                        },
-                        progressIcon: Text(
-                          "${homeController.humiditeAir.value}%",
-                          style: Get.theme.textTheme.subtitle1,
+                    Obx(
+                      () => Container(
+                        decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                        padding: const EdgeInsets.all(15.0),
+                        child: itemscard(
+                          context: context,
+                          title: "aeration",
+                          buttontitle: homeController.ventilateur.value
+                              ? "Eteindre"
+                              : "Allumer",
+                          height: 69.0,
+                          width: 69.0,
+                          currentStep:
+                              homeController.ventilateur.value ? 100 : 0,
+                          settings: () {
+                            homeController.setparameters(
+                              parametre: "humiditeAir",
+                              valeur: homeController.ventilateur.value,
+                            );
+                          },
+                          progressIcon: Text(
+                            homeController.ventilateur.value ? "ON" : "OFF",
+                            style: Get.theme.textTheme.subtitle1,
+                          ),
                         ),
                       ),
                     ),
+                    Obx(
+                      () => Container(
+                        decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                        padding: const EdgeInsets.all(15.0),
+                        child: itemscard(
+                          context: context,
+                          title: "arrosage",
+                          buttontitle: homeController.arroseur.value
+                              ? "Eteindre"
+                              : "Allumer",
+                          height: 69.0,
+                          width: 69.0,
+                          currentStep: homeController.arroseur.value ? 100 : 0,
+                          settings: () {
+                            homeController.setparameters(
+                              parametre: "humiditeSol",
+                              valeur: homeController.arroseur.value,
+                            );
+                          },
+                          progressIcon: Text(
+                            homeController.arroseur.value ? "ON" : "OFF",
+                            style: Get.theme.textTheme.subtitle1,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]),
+                ),
+              ),
+            ],
+          ),
+        ),
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                      onPressed: (() async {
+                        Get.to(const AccountConnexionView());
+                      }),
+                      icon: const Icon(
+                        Icons.add_circle,
+                        size: 40,
+                        color: Color.fromRGBO(14, 98, 12, 1),
+                      )),
+                  const Text(
+                    'Ajouter Serre',
+                    style: TextStyle(color: Color.fromRGBO(14, 98, 12, 1)),
                   )
-                ]),
-              ),
-            ),
-            SizedBox(
-              child: Card(
-                color: const Color.fromRGBO(255, 255, 255, 0.85),
-                elevation: 10.0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0)),
-                child: Column(children: [
-                  Obx(
-                    () => Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: itemscard(
-                        context: context,
-                        title: "éclairage",
-                        buttontitle: "allumer",
-                        height: 69.0,
-                        width: 69.0,
-                        currentStep: homeController.lumiere.value ? 100 : 0,
-                        settings: () {
-                          homeController.setparameters(parametre: "luminosite", valeur:true ,);
-                        },
-                        progressIcon: Text(
-                          homeController.lumiere.value ? "ON" : "OFF",
-                          style: Get.theme.textTheme.subtitle1,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Obx(
-                    () => Container(
-                      decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(15))),
-                      padding: const EdgeInsets.all(15.0),
-                      child: itemscard(
-                        context: context,
-                        title: "arrosage",
-                        buttontitle: "arroser",
-                        height: 69.0,
-                        width: 69.0,
-                        currentStep: homeController.arroseur.value ? 100 : 0,
-                        settings: () {
-                          // TODO: Mettre la fonction pour mettre à jour les etats de l'arrosage
-                        },
-                        progressIcon: Text(
-                          homeController.arroseur.value ? "ON" : "OFF",
-                          style: Get.theme.textTheme.subtitle1,
-                        ),
-                      ),
-                    ),
-                  ),
-                ]),
-              ),
-            ),
-          ],
-        ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                    onPressed: (() async {
-                      Get.to(const AccountConnexionView());
-                      // Serre? serre = await SerreProvider.instance.getSerre();
-                      // print(serre?.temperature);
-                      // homeController.onInit();
-                      // print(
-                      //     "temperature : ${int.parse(homeController.temperature.value.split('.').first)}");
-                    }),
-                    icon: const Icon(
-                      Icons.add_circle,
-                      size: 40,
-                      color: Color.fromRGBO(14, 98, 12, 1),
-                    )),
-                const Text(
-                  'Ajouter Serre',
-                  style: TextStyle(color: Color.fromRGBO(14, 98, 12, 1)),
-                )
-              ],
-            )
-          ],
-        ),
-      ),
-    );
+                ],
+              )
+            ],
+          ),
+        ));
   }
 
   Row itemscard({
@@ -262,11 +337,12 @@ class HomeView extends GetView<HomeController> {
                 ],
               ),
               IconButton(
-                  onPressed: settings,
-                  icon: const Icon(
-                    Icons.settings,
-                    size: 40.0,
-                  )),
+                icon: const Icon(
+                  Icons.settings,
+                  size: 40.0,
+                ),
+                onPressed: settings,
+              ),
             ],
           ),
         ),

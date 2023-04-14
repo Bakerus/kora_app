@@ -4,6 +4,7 @@ class Serre {
   String humiditeAir = "";
   String ph = "";
   String luminosite = "";
+  String token="";
   bool ventilateur = false;
   bool arroseur = false;
   bool lumiere = true;
@@ -18,6 +19,7 @@ class Serre {
     required this.ventilateur,
     required this.arroseur,
     required this.lumiere,
+    required this.token,
     this.userSerre,
   });
 
@@ -27,6 +29,7 @@ class Serre {
     humiditeAir = json['humiditeAir'];
     ph = json['ph'];
     luminosite = json['luminosite'];
+    token = json['token'];
     ventilateur = json['ventilateur'];
     arroseur = json['arroseur'];
     lumiere = json['lumiere'];
@@ -40,6 +43,7 @@ class Serre {
     data['humiditeAir'] = humiditeAir;
     data['ph'] = ph;
     data['luminosite'] = luminosite;
+    data['token'] = token;
     data['ventilateur'] = ventilateur;
     data['arroseur'] = arroseur;
     data['lumiere'] = lumiere;

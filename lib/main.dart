@@ -4,14 +4,14 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:kora/app/core/constant.dart';
 import 'package:kora/app/core/design/theme.dart';
-import 'package:kora/app/data/providers/userprovider.dart';
+import 'package:kora/app/data/providers/serreprovider.dart';
 import 'package:kora/app/routes/app_pages.dart';
 
 void main() async {
   await GetStorage.init();
   GetStorage getstorage = GetStorage();
   if (getstorage.read("token") != null) {
-    channel = await UserProvider.instance.serreConnection();
+    channel = await SerreProvider.instance.serreConnection();
   }
   String initialRoute() {
     if (getstorage.read("email") != null) {

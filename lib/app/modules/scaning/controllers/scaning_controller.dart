@@ -1,10 +1,13 @@
 // ignore_for_file: unnecessary_overrides
 
+import 'dart:convert';
+
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:get/get.dart';
 
 import 'package:kora/app/core/constant.dart';
+import 'package:kora/app/modules/home/views/home_view.dart';
 import '../../../core/widgets/snackbar.dart';
 
 class ScaningController extends GetxController {
@@ -34,31 +37,22 @@ class ScaningController extends GetxController {
       scannedQrcode = await FlutterBarcodeScanner.scanBarcode(
           '#21C092', 'Cancel', true, ScanMode.QR);
       print(scannedQrcode);
-      if (channel != null)
-        channel!.sink.add("{'type':'Serre Connection','token':$scannedQrcode}");
 
-      Snackbar snackbar = const Snackbar();
-      snackbar.showSnackbar(
-          title: "Echec Connexion", message: " Essayer de scanner à nouveau");
-
-      // Get.snackbar(
-      //   "",
-      //   "try again$scannedQrcode",
-      //   icon: const Icon(
-      //     Icons.close,
-      //     size: 20,
-      //     color: Color.fromRGBO(47, 72, 88, 0.8),
-      //   ),
-      //   snackPosition: SnackPosition.BOTTOM,
-      //   titleText: Row(
-      //     children: const [
-      //       Text("Connection Failed")
-      //     ],
-      //   ),
-      //   backgroundColor: Colors.white,
-      //   colorText: AppColors.greyBlue,
-      // );
-
+      if (scannedQrcode.isEmpty) {
+        Snackbar snackbar = const Snackbar();
+        snackbar.showSnackbar(
+            title: "Echec Connexion", message: " Essayer de scanner à nouveau");
+        print(scannedQrcode);
+      } else {
+        if (channel != null) {
+          channel!.sink.add(json
+              .encode({'type': 'Serre Connection', 'token': scannedQrcode}));
+        }
+        Snackbar snackbar = const Snackbar();
+        snackbar.showSnackbar(
+            title: "success", message: "Le code QR a été scanné avec succés");
+        Get.to(const HomeView());
+      }
     } on PlatformException {}
   }
 }

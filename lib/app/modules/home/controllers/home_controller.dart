@@ -24,7 +24,7 @@ class HomeController extends GetxController {
   void onInit() async {
     super.onInit();
     recuperEtats();
-    Timer.periodic(Duration(seconds: 2), ((timer) {
+    Timer.periodic(const Duration(seconds: 2), ((timer) {
       recuperEtats();
     }));
   }

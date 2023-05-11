@@ -131,6 +131,7 @@ class AppTheme {
 
 
       inputDecorationTheme: InputDecorationTheme(
+        
           hintStyle: const TextStyle(
             color: AppColors.redDarkBlue,
           ),
